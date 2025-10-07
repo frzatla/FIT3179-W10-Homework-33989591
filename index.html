@@ -1,0 +1,153 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 400,
+  "height": 400,
+  "title": "Wildlife Species Distribution by Group",
+  "data": {
+    "url": "https://raw.githubusercontent.com/frzatla/3179-Visualisation2/main/richness_by_class_state.csv"
+  },
+  "params": [
+    {
+      "name": "State_selection",
+      "value": "New South Wales",
+      "bind": {
+        "input": "select",
+        "options": [
+          "New South Wales",
+          "Victoria",
+          "Queensland",
+          "South Australia",
+          "Western Australia",
+          "Tasmania",
+          "Northern Territory",
+          "Australian Capital Territory"
+        ],
+        "labels": [
+          "New South Wales",
+          "Victoria",
+          "Queensland",
+          "South Australia",
+          "Western Australia",
+          "Tasmania",
+          "Northern Territory",
+          "Australian Capital Territory"
+        ],
+        "name": "Select State: "
+      }
+    }
+  ],
+  "transform": [
+    {
+      "filter": "datum.state == State_selection"
+    },
+    {
+      "calculate": "datum.species_count",
+      "as": "Species Count"
+    }
+  ],
+  "layer": [
+    {
+      "mark": {
+        "type": "arc",
+        "innerRadius": 80,
+        "outerRadius": 150
+      },
+      "encoding": {
+        "theta": {
+          "field": "species_count",
+          "type": "quantitative",
+          "stack": true
+        },
+        "color": {
+          "field": "group",
+          "type": "nominal",
+          "scale": {
+            "domain": [
+              "Birds",
+              "Insects",
+              "Mammals",
+              "Reptiles",
+              "Amphibians",
+              "Fish",
+              "Other animals"
+            ],
+            "range": [
+              "#1f77b4",
+              "#ff7f0e",
+              "#2ca02c",
+              "#d62728",
+              "#9467bd",
+              "#8c564b",
+              "#e377c2"
+            ]
+          },
+          "legend": {
+            "title": "Animal Group",
+            "orient": "right"
+          }
+        },
+        "opacity": {
+          "value": 0.8
+        },
+        "tooltip": [
+          {
+            "field": "state",
+            "type": "nominal",
+            "title": "State"
+          },
+          {
+            "field": "group",
+            "type": "nominal",
+            "title": "Animal Group"
+          },
+          {
+            "field": "species_count",
+            "type": "quantitative",
+            "title": "Species Count",
+            "format": ","
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "center",
+        "baseline": "middle",
+        "dx": 0,
+        "dy": -10,
+        "fontSize": 16,
+        "fontWeight": "bold"
+      },
+      "encoding": {
+        "text": {
+          "aggregate": "sum",
+          "field": "species_count",
+          "type": "quantitative",
+          "format": ","
+        },
+        "color": {
+          "value": "#333"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "center",
+        "baseline": "middle",
+        "dx": 0,
+        "dy": 10,
+        "fontSize": 12
+      },
+      "encoding": {
+        "text": {
+          "value": "Total Species"
+        },
+        "color": {
+          "value": "#666"
+        }
+      }
+    }
+  ]
+}
