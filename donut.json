@@ -4,7 +4,7 @@
   "height": 400,
   "title": "Wildlife Species Distribution by Group",
   "data": {
-    "url": "https://raw.githubusercontent.com/frzatla/3179-Visualisation2/main/richness_by_class_state.csv"
+    "url": "https://raw.githubusercontent.com/frzatla/3179-Visualisation2/main/data/richness_by_class_state.csv"
   },
   "params": [
     {
