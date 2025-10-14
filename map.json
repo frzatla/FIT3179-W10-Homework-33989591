@@ -63,7 +63,7 @@
         "color": {
           "field": "species_count",
           "type": "quantitative",
-          "title": "Distinct species species",
+          "title": "Distinct species count",
           "scale": {
             "scheme": "greens"
           },
